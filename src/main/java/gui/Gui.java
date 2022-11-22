@@ -93,22 +93,39 @@ public class Gui extends Application {
         resultField.setFocusTraversable(false);
         pane.add(resultField,1,3);
 
-        // Add Button
-        Button button = new Button("Calculate");
-        button.setPrefHeight(40);
-        button.setDefaultButton(true);
-        button.setPrefWidth(100);
-        pane.add(button,0,4,2,1);
-        GridPane.setHalignment(button, HPos.CENTER);
-        GridPane.setMargin(button, new Insets(20, 0,20,0));
+        // Add Button Calculate
+        Button buttonCalculate = new Button("Calculate");
+        buttonCalculate.setPrefHeight(40);
+        buttonCalculate.setDefaultButton(true);
+        buttonCalculate.setPrefWidth(100);
+        pane.add(buttonCalculate,0,4,2,1);
+        GridPane.setHalignment(buttonCalculate, HPos.CENTER);
+        GridPane.setMargin(buttonCalculate, new Insets(20, 10,20,10));
 
-        button.setOnAction(new EventHandler<ActionEvent>() {
+        // Add button Reset Fields Text
+        Button buttonReset = new Button("Reset");
+        buttonReset.setPrefHeight(20);
+        buttonReset.setPrefWidth(50);
+        pane.add(buttonReset,1,4,3,1);
+        GridPane.setHalignment(buttonReset, HPos.RIGHT);
+
+
+        buttonCalculate.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 int damage = Integer.parseInt(damageField.getText());
                 int armor = Integer.parseInt(armorField.getText());
                 double finalDamage = damage/(1+(armor/100f));
                 resultField.setText(String.format("%.2f",finalDamage));
+            }
+        });
+
+        buttonReset.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                damageField.setText("");
+                armorField.setText("");
+                resultField.setText("");
             }
         });
     }
